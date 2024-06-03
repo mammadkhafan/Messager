@@ -42,7 +42,10 @@ public class ClientMannager extends Thread/*implements Runnable*/{
 
             String name = reader.readLine();
             currentUser = new User(name);
-            server.users.add(currentUser);
+            //SYNCHRONIZED BLOCK
+            synchronized (server){
+                server.users.add(currentUser);
+            }
             System.out.println(createCommunication("Enter name", name));
 
             writer.println("Enter password:");

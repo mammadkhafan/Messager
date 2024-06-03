@@ -8,7 +8,7 @@ public class Server {
     ServerSocket socket;
     int port = 9090;
 
-    public ArrayList<User> users = new ArrayList<User>();;
+    public ArrayList<User> users = new ArrayList<User>();
     
     public Server() {
         
