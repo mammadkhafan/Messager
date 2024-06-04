@@ -17,12 +17,14 @@ public class Server {
 
             System.out.println("---Server Created---");
 
+            //THIS WHILE LOOP WILL RUN FOREVER
             while (true) {
                 Socket clientSocket = socket.accept();
 
                 System.out.println("New Client joined!");
 
-                Thread thread = new Thread(new ClientMannager(this, clientSocket));
+                //CREATE A NEW THREAD FOR NEW CLIENT
+                Thread thread = new Thread(new ClientHandler(this, clientSocket));
 
                 thread.start();
             }

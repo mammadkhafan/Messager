@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import Server.ClientMannager;
+import Server.ClientHandler;
 
 public class Client {
     Socket socket;
@@ -46,7 +46,7 @@ public class Client {
             String password = in.nextLine();
             writer.println(password);
 
-            //GET WELCOME MESSAGE
+            //GET WELCOME MESSAGE AND PRINT IN THE SAME LINE
             System.out.println(reader.readLine());
 
             while (true) {
@@ -56,15 +56,20 @@ public class Client {
                 menuText = reader.readLine();
                 System.out.println(menuText);
 
-                //PUSH A COMMAND TO SERVER
-                String command = in.nextLine();
-                writer.println(command);
-                
-                if (command.equals(Integer.toString(ClientMannager.Exit_number))) {
-                    System.out.println(reader.readLine());
-                    break;
-                } else {
-                    doTask(command);
+                //THIS WHILE LOOP IS FOR INVALID INPUT FROM CLIENT
+                while (true) {
+                    //PUSH A COMMAND TO SERVER
+                    String command = in.nextLine();
+                    writer.println(command);
+                    
+                    if (command.equals(Integer.toString(ClientHandler.Exit_number))) {
+                        //EXIT
+                        System.out.println(reader.readLine());
+                        break;
+                    } else {
+                        //DO THE TASK
+                        doTask(command);
+                    }
                 }
             }
 
@@ -73,8 +78,9 @@ public class Client {
         }
     }
 
-    public void doTask(String taskType) {
-        if (taskType.equals(Integer.toString(ClientMannager.Echo_number))) {
+    private void doTask(String taskType) {
+        //HANDEL ECHO
+        if (taskType.equals(Integer.toString(ClientHandler.Echo_number))) {
             try {
                 //GET QUESTION OF TASK
                 System.out.println(reader.readLine());
