@@ -20,6 +20,8 @@ public class Client {
     DataInputStream reader;
     PrintWriter writer;
 
+    boolean exitRequest = false;
+
     public Client() {
         try {
             socket = new Socket(host, port);
@@ -49,7 +51,7 @@ public class Client {
             //GET WELCOME MESSAGE AND PRINT IN THE SAME LINE
             System.out.println(reader.readLine());
 
-            while (true) {
+            while (exitRequest == false) {
                 //GET THE MENU TEXT
                 String menuText = reader.readLine();
                 System.out.println(menuText);
@@ -69,6 +71,7 @@ public class Client {
                     } else {
                         //DO THE TASK
                         doTask(command);
+                        break;
                     }
                 }
             }
